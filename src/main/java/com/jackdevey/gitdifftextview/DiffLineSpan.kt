@@ -1,4 +1,4 @@
-package com.alorma.diff.lib
+package com.jackdevey.gitdifftextview
 
 import android.graphics.Canvas
 import android.graphics.Paint
