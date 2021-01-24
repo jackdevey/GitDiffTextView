@@ -8,17 +8,17 @@ import android.os.Build
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.TextUtils
-import android.text.style.ForegroundColorSpan
+import android.text.style.BackgroundColorSpan
 import android.util.AttributeSet
 import android.widget.TextView
 
-class DiffTextView : TextView {
+/**
+ * Created by Bernat on 22/12/2014.
+ * Converted to kotlin & adapted for dark mode by Jack Devey 24/01/2021.
+ */
+class View : TextView {
     private var additionColor = 0
     private var deletionColor = 0
-    private var infoColor = 0
-    private var additionTextColor = 0
-    private var deletionTextColor = 0
-    private var infoTextColor = 0
     private var showInfo = false
     private var maxLines = -1
 
@@ -40,7 +40,6 @@ class DiffTextView : TextView {
         isInEditMode
         val array = context.obtainStyledAttributes(attrs,
                 R.styleable.DiffTextViewStyle, defStyleAttr, 0)
-
         when (context.resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)) {
             Configuration.UI_MODE_NIGHT_YES -> {
                 additionColor = array.getColor(R.styleable.DiffTextViewStyle_diff_addition_color, Color.parseColor("#2f9e2f"))
@@ -51,10 +50,6 @@ class DiffTextView : TextView {
                 deletionColor = array.getColor(R.styleable.DiffTextViewStyle_diff_deletion_color, Color.parseColor("#FFDDDD"))
             }
         }
-        infoColor = array.getColor(R.styleable.DiffTextViewStyle_diff_info_color, Color.parseColor("#EEEEEE"))
-        additionTextColor = array.getColor(R.styleable.DiffTextViewStyle_diff_addition_text_color, Color.TRANSPARENT)
-        deletionTextColor = array.getColor(R.styleable.DiffTextViewStyle_diff_deletion_text_color, Color.TRANSPARENT)
-        infoTextColor = array.getColor(R.styleable.DiffTextViewStyle_diff_info_text_color, Color.TRANSPARENT)
         showInfo = array.getBoolean(R.styleable.DiffTextViewStyle_diff_show_diff_info, false)
         array.recycle()
     }
@@ -81,27 +76,15 @@ class DiffTextView : TextView {
                                 """.trimIndent()
                         }
                         val firstChar = token[0]
-                        var color = Color.TRANSPARENT
-                        var textColor = Color.TRANSPARENT
+                        var color = 0
                         if (firstChar == '+') {
                             color = additionColor
-                            textColor = additionTextColor
                         } else if (firstChar == '-') {
                             color = deletionColor
-                            textColor = deletionTextColor
-                        } else if (token.startsWith("@@")) {
-                            color = infoColor
-                            textColor = infoTextColor
                         }
                         val spannableDiff = SpannableString(token)
-                        // Span for line color (where transparent is considered as default)
-                        if (color != Color.TRANSPARENT) {
-                            val span = DiffLineSpan(color, paddingLeft)
-                            spannableDiff.setSpan(span, 0, token.length, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE)
-                        }
-                        // Span for text color (where transparent is considered as default)
-                        if (textColor != Color.TRANSPARENT) {
-                            val span = ForegroundColorSpan(textColor)
+                        if (color == additionColor || color == deletionColor) {
+                            val span = BackgroundColorSpan(color)
                             spannableDiff.setSpan(span, 0, token.length, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE)
                         }
                         builder.append(spannableDiff)
