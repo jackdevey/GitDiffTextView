@@ -40,16 +40,13 @@ class GitDiffTextView : TextView {
 
     private fun init() {
         isInEditMode
-        when (context.resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)) {
-            Configuration.UI_MODE_NIGHT_YES -> {
-                additionColor = Color.parseColor("#2f9e2f")
-                deletionColor = Color.parseColor("#cf2929")
-            }
-            Configuration.UI_MODE_NIGHT_NO -> {
-                additionColor = Color.parseColor("#CCFFCC")
-                deletionColor = Color.parseColor("#FFDDDD")
-            }
-        }
+        additionColor = Color.parseColor("#CCFFCC")
+        deletionColor = Color.parseColor("#FFDDDD")
+    }
+
+    fun setColor(addColor: Int, delColor: Int) {
+        additionColor = addColor
+        deletionColor = delColor
     }
 
     override fun setText(text: CharSequence, type: BufferType) {
