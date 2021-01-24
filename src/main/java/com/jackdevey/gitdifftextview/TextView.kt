@@ -16,7 +16,7 @@ import android.widget.TextView
  * Created by Bernat on 22/12/2014.
  * Converted to kotlin & adapted for dark mode by Jack Devey 24/01/2021.
  */
-class View : TextView {
+class TextView : TextView {
     private var additionColor = 0
     private var deletionColor = 0
     private var showInfo = false
