@@ -22,30 +22,34 @@ class GitDiffTextView : TextView {
     private var maxLines = -1
 
     constructor(context: Context?) : super(context) {
-        init(Color.parseColor("#CCFFCC"), Color.parseColor("#FFDDDD"))
+        init()
     }
 
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {
-        init(Color.parseColor("#CCFFCC"), Color.parseColor("#FFDDDD"))
-    }
-
-    constructor(context: Context?, attrs: AttributeSet?, addColor: String, delColor: String) : super(context, attrs) {
-        init(Color.parseColor(addColor), Color.parseColor(delColor))
+        init()
     }
 
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
-        init(Color.parseColor("#CCFFCC"), Color.parseColor("#FFDDDD"))
+        init()
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes) {
-        init(Color.parseColor("#CCFFCC"), Color.parseColor("#FFDDDD"))
+        init()
     }
 
-    private fun init(addColor: Int, delColor: Int) {
+    private fun init() {
         isInEditMode
-        additionColor = addColor
-        deletionColor = delColor
+        when (context.resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)) {
+            Configuration.UI_MODE_NIGHT_YES -> {
+                additionColor = Color.parseColor("#2f9e2f")
+                deletionColor = Color.parseColor("#cf2929")
+            }
+            Configuration.UI_MODE_NIGHT_NO -> {
+                additionColor = Color.parseColor("#CCFFCC")
+                deletionColor = Color.parseColor("#FFDDDD")
+            }
+        }
     }
 
     override fun setText(text: CharSequence, type: BufferType) {
