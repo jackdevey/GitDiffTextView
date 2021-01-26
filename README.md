@@ -1,12 +1,22 @@
-# GitDiffTextView #
+# GitDiffTextView
 
-With this android library you are able to display DIFF in a TextView.
+This is a modified fork of [alorma/GitDiffTextView](https://github.com/alorma/GitDiffTextView), with customised colours and an updated gradle. This package was created primarily for use in [BanDev/Labyrinth](https://github.com/BanDev/Labyrinth), and for any other projects I still recommend using the original library ([alorma/GitDiffTextView](https://github.com/alorma/GitDiffTextView)). However, if you still want to use it I'll add some installation steps below:
 
-![GitDiffTextView](art/art.png)
+## Installation
 
-Usage 
-========
+#### Add the JitPack repository to your build file
+Add it in your root build.gradle at the end of repositories:
 
+``` groovy
+allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+```
+
+#### Add the dependency
 Add dependency to your build.gradle file:
 
 ``` groovy
@@ -14,6 +24,8 @@ Add dependency to your build.gradle file:
         compile 'com.github.alorma:diff-textview:1.3.0'
     }
 ```
+
+## Usage
 
 Add GitDiffTextView to your layout: 
 
