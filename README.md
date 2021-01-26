@@ -20,9 +20,9 @@ allprojects {
 Add dependency to your build.gradle file:
 
 ``` groovy
-    dependencies {
-        implementation 'com.github.jackdevey:GitDiffTextView:1.0.0'
-    }
+	dependencies {
+	        implementation 'com.github.jackdevey:GitDiffTextView:1.0.0'
+	}
 ```
 
 ## Usage
