@@ -21,7 +21,7 @@ Add dependency to your build.gradle file:
 
 ``` groovy
     dependencies {
-        compile 'com.github.alorma:diff-textview:1.3.0'
+        implementation 'com.github.jackdevey:GitDiffTextView:1.0.0'
     }
 ```
 
@@ -31,7 +31,7 @@ Add GitDiffTextView to your layout:
 
 ``` xml
 
-<com.alorma.diff.lib.DiffTextView
+<com.jackdevey.gitdifftextview.DiffTextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:id="@+id/diffTextView"/>
